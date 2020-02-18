@@ -1,0 +1,6 @@
+spring boot parte dois
+
+aula 1 video 2
+"modificação no método lista dentro do controller para adicionar paginação"
+na listagem dos resultados. envolveu adaptação na interface TopicoRepository e 
+na classe TopicoDto, método converter.
