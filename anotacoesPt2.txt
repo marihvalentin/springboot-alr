@@ -41,6 +41,22 @@ o parâmetro sort pode ser usado mais de uma vez para definir mais de um parâmetr
 se não for passado parâmetro de ordenação nem paginacao e quantidade, o spring usa o padrão de ordenação pelo id. mas também é possível definir uma ordem padrão caso ela não 
 seja passada na url pelo cliente, através da anotação @PageableDefault com parâmetros sort, direction, page e size preenchidos entre parênteses.
 
+aula 1 atividade 8
+
+> Qual o objetivo da anotação @PageableDefault?
+**Indicar o padrão de paginação/ordenação ao Spring, quando o cliente da API não enviar tais informações**
+
+Nesta aula, aprendemos que:
+
+>> Para realizar paginação com Spring Data JPA, devemos utilizar a interface Pageable;
+>> Nas classes Repository, os métodos que recebem um pageable como parâmetro retornam objetos do tipo Page<>, ao invés de List<>;
+>> Para o Spring incluir informações sobre a paginação no JSON de resposta enviado ao cliente da API, devemos alterar o retorno 
+do método do controller de List<> para Page<>;
+>> Para fazer a ordenação na consulta ao banco de dados, devemos utilizar também a interface Pageable, passando como parâmetro 
+a direção da ordenação, utilizando a classe Direction, e o nome do atributo para ordenar;
+>> Para receber os parâmetros de ordenação e paginação diretamente nos métodos do controller, devemos habilitar o módulo 
+SpringDataWebSupport, adicionando a anotação @EnableSpringDataWebSupport na classe ForumApplication.
+
 
 
 
