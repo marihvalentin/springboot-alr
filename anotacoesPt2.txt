@@ -1,12 +1,30 @@
 spring boot parte dois
 
-aula 1 video 2
+aula 1 atividade 2 - PAGINAÇÃO
 "modificação no método lista dentro do controller para adicionar paginação"
 na listagem dos resultados. envolveu adaptação na interface TopicoRepository e 
 na classe TopicoDto, método converter.
 
-aula 1 video 3
-"melhorar a listagem paginada dentro do controller e atribuir opção de ordenação personalizada dos resultados pelo cliente alterando a lógica do método lista"
+aula 1 atividade 4 - VANTAGEM DE UTILIZAR A INTERFACE PAGE
+
+> Como vimos no vídeo anterior, foi necessário alterar o retorno do método lista, de List<Topico>, para Page<Topico>. 
+Qual a vantagem de devolver um objeto Page, ao invés de um List? 
+**Adicionar dados sobre a paginação no JSON de resposta**
+Ao utilizar o objeto Page, além de devolver os registros, o Spring também devolve informações sobre a paginação no JSON de resposta , 
+como número total de registros e páginas.
+
+aula 1 atividade 5 - ORDENAÇÃO
+"melhorada a listagem paginada dentro do controller e atribuída opção de ordenação personalizada dos resultados pelo cliente alterando a lógica do método lista"
 foi adicionado o atributo ordenação como RequestParam e dentro do PageRequest.of o "Sort.Direction.ESC" ou "Sort.Direction.DESC" que definem se os registros
 serão listados em ordem crescente ou descrescente com relação ao parâmetro de ordenação e o campo "ordenacao" a ser preenchido no corpo do link, assim como
 a pagina e qtd.
+
+
+aula 1 atividade 6 - ORDENANDO REGISTROS NA LISTA
+
+> Vimos que, para ordenar os registros, foi necessário passar um parâmetro com o nome do atributo para realizar a ordenação. 
+O que acontece se o nome do atributo informado estiver incorreto?
+**Um erro será devolvido ao cliente** (Erro 500 pois o parâmetro não foi encontrado)
+
+
+
