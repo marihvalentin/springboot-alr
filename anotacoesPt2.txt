@@ -15,7 +15,7 @@ como número total de registros e páginas.
 
 aula 1 atividade 5 - ORDENAÇÃO
 "melhorada a listagem paginada dentro do controller e atribuída opção de ordenação personalizada dos resultados pelo cliente alterando a lógica do método lista"
-foi adicionado o atributo ordenação como RequestParam e dentro do PageRequest.of o "Sort.Direction.ESC" ou "Sort.Direction.DESC" que definem se os registros
+foi adicionado o atributo ordenação como RequestParam e dentro do PageRequest.of o "Sort.Direction.ASC" ou "Sort.Direction.DESC" que definem se os registros
 serão listados em ordem crescente ou descrescente com relação ao parâmetro de ordenação e o campo "ordenacao" a ser preenchido no corpo do link, assim como
 a pagina e qtd.
 
@@ -25,6 +25,22 @@ aula 1 atividade 6 - ORDENANDO REGISTROS NA LISTA
 > Vimos que, para ordenar os registros, foi necessário passar um parâmetro com o nome do atributo para realizar a ordenação. 
 O que acontece se o nome do atributo informado estiver incorreto?
 **Um erro será devolvido ao cliente** (Erro 500 pois o parâmetro não foi encontrado)
+
+aula 1 atividade 7 - SIMPLIFICANDO A PAGINAÇÃO E ORDENAÇÃO
+"Substituição dos parâmetros soltos de paginação e ordenação por um parâmetro do objeto Pageable para simplificação, adicionada a anotação @EnableSpringDataWebSupport no ForumApplication e definidos com @PageableDefault valores padrão caso não haja passagem de parâmetros em url pelo cliente"
+metodo lista foi modificado para não "pegar" os parametros de pagina, qtd e ordenacao soltos e serem todos definidos pelo parametro "paginacao",
+objeto do tipo pageable.  
+Para o spring conseguir pegar os parametros de paginação e ordenação da requisição, é necessário que o módulo esteja habilitado no projeto,
+o módulo que pega as coisas da web e passa para o Spring Data.
+Foi alterada a classe ForumApplication (main do Spring Boot) com a anotação @EnableSpringDataWebSupport sobre a declaração da classe.
+Assim foi habilitado o suporte para o Spring pegar da requisição, dos parâmetros da url os campos, informações de paginação e orndenação
+e repassar ao Spring Data.
+Por conta disso, os parâmetros a serem passados na url agora deverão ser em inglês.
+EX:http://localhost:8080/topicos?page=0&size=10&sort=id,asc (sort: ordenação, size: qtd, asc CRESCENTE ou desc DECRESCENTE)
+o parâmetro sort pode ser usado mais de uma vez para definir mais de um parâmetro de ordenação.
+se não for passado parâmetro de ordenação nem paginacao e quantidade, o spring usa o padrão de ordenação pelo id. mas também é possível definir uma ordem padrão caso ela não 
+seja passada na url pelo cliente, através da anotação @PageableDefault com parâmetros sort, direction, page e size preenchidos entre parênteses.
+
 
 
 
