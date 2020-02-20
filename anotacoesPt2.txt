@@ -4,3 +4,9 @@ aula 1 video 2
 "modificação no método lista dentro do controller para adicionar paginação"
 na listagem dos resultados. envolveu adaptação na interface TopicoRepository e 
 na classe TopicoDto, método converter.
+
+aula 1 video 3
+"melhorar a listagem paginada dentro do controller e atribuir opção de ordenação personalizada dos resultados pelo cliente alterando a lógica do método lista"
+foi adicionado o atributo ordenação como RequestParam e dentro do PageRequest.of o "Sort.Direction.ESC" ou "Sort.Direction.DESC" que definem se os registros
+serão listados em ordem crescente ou descrescente com relação ao parâmetro de ordenação e o campo "ordenacao" a ser preenchido no corpo do link, assim como
+a pagina e qtd.
