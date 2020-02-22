@@ -87,7 +87,15 @@ o que é mais rápido e fácil que consultar no banco novamente nos proporciona gan
 com um resultado ainda não buscado, o hibernate fará a consulta no banco e salvará o resultado para próximas buscas***
 
 
+"Utilizando Cache: adicionada dependência no pom.xml, habilitado o uso no ForumApplication, indicado uso no método lista da classe 
+TopicosController e adicionadas propriedades de visualização e formatação de consultas no banco no Run pelo Hibernate no application.properties"
 
+
+aula 2 parte 3 - ANOTAÇÃO @CACHEABLE
+
+> No último vídeo, vimos que a anotação @Cacheable possui o parâmetro value, do tipo String. Para que serve esse parâmetro?
+**Para indicar ao Spring o nome do cache associado a um determinado método**
+A string passada como parâmetro para a anotação @Cacheable funciona como um identificador único do cache.
 
 
 
