@@ -97,6 +97,19 @@ aula 2 parte 3 - ANOTAÇÃO @CACHEABLE
 **Para indicar ao Spring o nome do cache associado a um determinado método**
 A string passada como parâmetro para a anotação @Cacheable funciona como um identificador único do cache.
 
+aula 2 parte 4 - INVALIDANDO O CACHE
+
+para casos de informações serem atualizadas na api com alterações, adicionamentos ou exclusões, será necessário a invalidação do cache para
+que a busca não traga informações desatualizadas.
+o spring precisará ser avisado de alterar os dados do cache assim que uma informação for atualizada.
+
+Para isso, deverá ser adicionada a anotação "@CacheEvict" sobre o método desejado com o atributo value preenchido indicando qual cacheable deverá ser limpo e 
+também o parâmetro "allEntries", que indicará se deverá limpar todos os registros (nesse caso, com a propriedade "true"), assim cada vez que o método 
+for utilizado o spring limpará o cache salvo na memória para atualização das informações.
+ex: sobre os métodos cadastrar, atualizar e remover foi adicionada a anotação "@CacheEvict(value = "listaDeTopicos", allEntries = true)".
+em testes no Postman, funcionou perfeitamente.
+
+"Invalidação do cache para caso de atualização das informações cadastradas na API, utilizando a anotação @CacheEvict nos métodos necessários da classe TopicosController com seus respectivos parâmetros."
 
 
 
