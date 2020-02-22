@@ -109,8 +109,18 @@ for utilizado o spring limpará o cache salvo na memória para atualização das inf
 ex: sobre os métodos cadastrar, atualizar e remover foi adicionada a anotação "@CacheEvict(value = "listaDeTopicos", allEntries = true)".
 em testes no Postman, funcionou perfeitamente.
 
-"Invalidação do cache para caso de atualização das informações cadastradas na API, utilizando a anotação @CacheEvict nos métodos necessários da classe TopicosController com seus respectivos parâmetros."
+"Invalidação do cache para caso de atualização das informações cadastradas na API, utilizando a 
+anotação @CacheEvict nos métodos necessários da classe TopicosController com seus respectivos 
+parâmetros."
 
+
+aula 2 atividade 5 - SOBRE A ANOTAÇÃO @CACHEEVICT
+
+> Sobre a utilização da anotação @CacheEvict, é correto afirmar que:
+** Ela deveria ser utilizada nos métodos que alteraram os registros armazenados em cache pela API **
+(Isso é importante para evitar que os clientes obtenham informações desatualizadas.)
+** Devemos indicar, no parâmetro value, quais caches devem ser invalidados **
+(Nesse parâmetro devemos indicar os identificadores dos caches que deverão ser invalidados.)
 
 
 
