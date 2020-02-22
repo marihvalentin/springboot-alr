@@ -123,4 +123,15 @@ aula 2 atividade 5 - SOBRE A ANOTAÇÃO @CACHEEVICT
 (Nesse parâmetro devemos indicar os identificadores dos caches que deverão ser invalidados.)
 
 
+aula 2 atividade 6 - BOAS PRÁTICAS NO USO DE CACHE
+
+Cache é um recurso utilizado para ganhar performance na aplicação, principalmente quando é utilizado o banco de dados.
+Porém, na prática o cache tem necessidade de ser invalidado em alguns momentos, o que tem um custo de processamento e 
+dependendo do caso pode impactar negativamente na performance da API, ao invés de ser vantajoso.
+Por isso, não se deve utilizar o cache em toooodos os lugares, mas sim onde fizer a diferença real no uso.
+No geral, faz sentido utilizar o cache em tabelas que nunca ou raramente são atualizadas (por exemplo, no projeto do curso
+não seria um bom cenário, pois os tópicos de um fórum são atualizados constantemente), como tabelas de estados, endereços
+propriedades e afins.
+
+
 
