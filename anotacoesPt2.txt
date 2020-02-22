@@ -57,6 +57,39 @@ a direção da ordenação, utilizando a classe Direction, e o nome do atributo para
 >> Para receber os parâmetros de ordenação e paginação diretamente nos métodos do controller, devemos habilitar o módulo 
 SpringDataWebSupport, adicionando a anotação @EnableSpringDataWebSupport na classe ForumApplication.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+aula 2 atividade 2 - UTILIZANDO CACHE
+
+Utilização do recurso de Cache para melhorar a performance da API
+
+é necessário adicionar o módulo de cache no spring boot como dependência no mavem no arquivo pom.xml
+adicionar um provedor de cache como dependência (quando o projeto estiver em ambiente produção, no curso não será adicionado)
+o spring por padrão utiliza um provedor de cache não indicado para uso em produção, em hash map, que utilizaremos.
+
+além de declarar dependência de cache no projeto é necessário habilitar o uso do cache no projeto, 
+na classe Forum Application com a anotação "@EnableCaching".
+Agora é possível utilizar. e para indicar ao spring que queremos a utilização de cache no método, deve ser adicionada
+a anotação "@Cacheable", assim a gente indica que queremos o retorno do método em cache.
+DEVE SER ADICIONADA A ANOTAÇÃO DO PACOTE SRPING, NÃO DO JAVAX!!!
+A anotação deve ser preenchida com um atributo value, que receberá uma String que será o identificador único desse cacheable
+usado para identificação, pois um projeto pode conter mais de um cacheable.
+para visualizarmos o funcionamento correto do retorno em cache, será adicionado no arquivo application.properties
+nas propriedades da jpa "spring.jpa.properties.hibernate.show_sql=true", que fala para o Hibernate imprimir os comandos
+sql cada vez que ele acessar o banco de dados.
+por padrão, ele imprime todas as propriedades numa linha só, para a formatação das informações impressas
+deverá ser adicionada a seguinte propriedade: "spring.jpa.properties.hibernate.format_sql=true"
+após salvar, testamos o envio da requisição no postman. no primeiro envio, é mostrado na Run do ForumApplication do Intellij
+a consulta que o hibernate realizou no banco de dados porém ao limpar o Run e executar a requisição novamente, não são
+mostrados dados de consulta no banco, pois ele mostra resultados buscados no cache (em memória) da consulta anterior,
+o que é mais rápido e fácil que consultar no banco novamente nos proporciona ganho de performance.
+***Para cada variação de parâmetro na consulta, o spring guarda o resultado na memória cache, se houver mudança de parâmetro
+com um resultado ainda não buscado, o hibernate fará a consulta no banco e salvará o resultado para próximas buscas***
+
+
+
+
+
 
 
 
