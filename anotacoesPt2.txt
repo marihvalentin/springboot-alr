@@ -184,5 +184,14 @@ serão restringidos.
 "Implementada a liberação de acesso aos endpoints públicos (métodos para lista de tópicos e detalhamento de tópicos) na classe SecurityConfigurations"  
 
 
+Aula 3 atividade 5 - Por que indicar o método GET?
+
+> Vimos no vídeo anterior que, para liberar acesso ao endpoint de lista de tópicos, foi necessário adicionar a seguinte linha de código:
+------ antMatchers(HttpMethod.GET, “/topicos”).permitAll(); ------
+Por que foi necessário indicar o método GET nessa configuração?
+
+** Para liberar acesso apenas às requisições do tipo GET **
+(Se não indicarmos o método HTTP, todos seriam permitidos.)
+
 
 
