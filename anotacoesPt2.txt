@@ -193,5 +193,27 @@ Por que foi necessário indicar o método GET nessa configuração?
 ** Para liberar acesso apenas às requisições do tipo GET **
 (Se não indicarmos o método HTTP, todos seriam permitidos.)
 
+Aula 3 atividade 6 - Restringindo acesso aos endpoints privados
+
+A ideia é restringir os métodos de alterar, cadastrar e excluir e exigir autenticação para realizar as alterações na API.
+Deveremos implementar a parte de autenticação: no pacote modelo já temos uma classe Usuario e utilizaremos dela para o usuário se autenticar no sistema. É uma classe
+de domínio da aplicação e foi transformada numa entidade da JPA, tendo já no banco uma tabela para guardar as informações. Porém, o Spring Security precisa saber
+que essa classe representa o usuário! Como?
+Será necessário implementar na classe uma interface, a UserDetails e implementar todos os métodos dela.
+nos métodos de getUsername e getPassword devemos indicar no retorno o "this.nomedoatributoquechamaoqueénecessário", ex: return this.email para "getUsername".
+os métodos que possuem retorno em boolean são métodos para controle de autenticação em casos do usuário estar desativado e afins, como não utilizaremos
+desses detalhes, todos serão configurados com "return true".
+O método que precisa devolver um Collection<? de GrantedAuthority> é relacionado a coleção com os perfis do usuário. Seu retorno será preenchido com a indicação para
+uma lista de perfis, o qual foi necessário implementar na classe e deverá ser criada uma classe Perfil que será uma entidade da JPA e será necessário criar uma
+tabela para guardar no banco os perfis. A classe perfil foi criada no pacote modelo, que terá como atributo o id e o nome, que será o nome do perfil.
+Mesmo configurado, o método da classe Usuário continua dando erro pois ela deve herdar da interface GrantedAuthority, então a classe que representa o perfil
+deverá implementar uma interface para indicar ao Spring que ela representa o perfil de acesso, a interface GrantedAuthority e implementar seu método o getAuthority
+que deverá devolver o atributo que denomina o perfil, o atributo "nome". Após as configurações na classe Usuario e Perfil, vamos voltar para SecurityConfigurations
+e utilizando o comando ".and().formLogin();" indicamos ao Spring a continuação da implementação e solicitamos que ele gere (chame) um formulário de autenticação e 
+um controller que recebe as requisições desse formulário.
+
+"Realizada implementação para restringir acesso aos endpoints privados com base na requisição de autenticação ao usuário"
+
+
 
 
