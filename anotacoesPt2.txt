@@ -143,7 +143,24 @@ Nesta aula, aprendemos que:
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AULA 3 Proteção com Spring Security
 
+Aula 3 atividade 2 - Habilitando o Spring Security
 
+Em uma aplicação, costuma-se ter um controle de acesso para restrições de quem pode disparar requisições para a API, tendo permissão para acessar determinados
+recursos. O Spring Boot possui um módulo focado na parte de segurança voltado a autenticação e autorização, o Spring Security.
+O primeiro passo para proteger a API é baixar o módulo do Spring Security, adicionando como dependência no arquivo pom.xml do Maven.
+O segundo passo é configurar a utilização. As configurações com spring boot são feitas no arquivo application.properties, mas como a parte de segurança
+é complicada pois há várias configurações e muitas dinâmicas e não fixas, nesse caso não utilizaremos o application.properties para as configurações, então
+ela será realizada toda em classe Java. Será necessário criar um classe onde terão todas as configurações de segurança da API.
+A classe será criada dentro do pacote security, adicionado dentro do pacote config e será denominada SecurityConfigurations
+O módulo de segurança é habilitado na API adicionando a anotação @EnableWebSecurity sobre o nome da classe.
+Como é uma classe que haverá configurações, é necessário adicionar a anotação @Configuration, assim ao rodar o projeto o Spring lerá
+a classe sabendo que nela há configurações para todo projeto. Além disso, a classe será extendida da classe "WebSecurityConfigurerAdapter" pois ela tem métodos para fazer
+as configurações que serão sobrescrevidos posteriormente.
+Por padrão, com a classe já montada dessa maneira já faz o projeto estar protegido pois o spring bloqueia toda a aplicação
+até que sejam feitas as devidas configurações.
+
+"Baixar, configurar como dependência no arquivo pom.xml e habilitar na classe SecurityConfigurations o módulo Spring Security"
 
 
