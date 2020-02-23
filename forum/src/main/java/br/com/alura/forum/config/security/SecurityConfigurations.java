@@ -25,7 +25,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter
     {   //liberando acesso aos endpoints públicos (metodo lista e detalhar que utilizam o GET)
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/topicos").permitAll()
-                .antMatchers(HttpMethod.GET, "topicos/*").permitAll();
+                .antMatchers(HttpMethod.GET, "topicos/*").permitAll()
+                .anyRequest().authenticated()
+        .and().formLogin();
     }
 
     //configurações de recursos estáticos (js, css, imagens, etc...)
