@@ -164,3 +164,13 @@ até que sejam feitas as devidas configurações.
 "Baixar, configurar como dependência no arquivo pom.xml e habilitar na classe SecurityConfigurations o módulo Spring Security"
 
 
+Aula 3 atividade 3 - Spring Security e os endpoints da API
+
+> Ao habilitar o Spring Security, o que acontecerá com os endpoints da API?
+** Eles serão bloqueados, por padrão **
+
+
+Aula 3 atividade 4 - Liberando acesso aos endpoints públicos
+
+
+
