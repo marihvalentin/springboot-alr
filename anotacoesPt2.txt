@@ -215,5 +215,9 @@ um controller que recebe as requisições desse formulário.
 "Realizada implementação para restringir acesso aos endpoints privados com base na requisição de autenticação ao usuário"
 
 
+Aula 3 atividade 7 - Objetivo do método anyRequest().authenticated()
 
+> Nas configurações de autorização, qual o objetivo de chamar o método anyRequest().authenticated()?
+** Para indicar que outras URLs que não foram configuradas devem ter acesso restrito **
+(Essa configuração evita que uma URL que não foi configurada seja pública.)
 
