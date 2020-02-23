@@ -172,5 +172,17 @@ Aula 3 atividade 3 - Spring Security e os endpoints da API
 
 Aula 3 atividade 4 - Liberando acesso aos endpoints públicos
 
+Faremos sobrescrita com as regras da nossa aplicação métodos de autenticação e autorização pertencentes a classe WebSecurityConfigureAdapter, a qual
+a classe SecurityConfigurations possui herança. Serão utilizados 3 métodos "Configure". Mas qual a diferença entre os 3?
+> O método que recebe o "AuthenticationManagerBuilder auth", serve para configurar autenticações;
+> O método que recebe "HttpSecurity http" serve para configurações de autorização (urls e quem pode acessá-las, etc)
+> O método que recebe "WebSecurity web" serve para configurações de recursos estáticos, como requisições para arquivos .js, css, imagens...
+Utilizaremos o método que recebe "HttpSecurity http", onde faremos configuração das urls do projeto, do que será público e privado.
+No projeto será liberado como público o endpoint que lista todos os tópicos "/topicos" e o que detalha um tópico em específico. Os outros (cadastrar, alterar e excluir)
+serão restringidos.
+
+"Implementada a liberação de acesso aos endpoints públicos (métodos para lista de tópicos e detalhamento de tópicos) na classe SecurityConfigurations"  
+
+
 
 
