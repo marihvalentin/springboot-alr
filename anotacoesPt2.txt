@@ -251,4 +251,10 @@ já consigo simular. Vou tentar me autenticar com aquele usuário. Digitando a sen
 E a partir de agora consigo chamar os endpoints que estão restritos.
 
 
+"Realizada as implementações necessárias para configurar a autenticação para acesso as endpoints privadas."
 
+Aula 3 atividade 9 - LÓGICA DE AUTENTICAÇÃO
+
+> No vídeo anterior, vimos que foi necessário criar uma classe, implementando a interface UserDetailsService do Spring Security. Qual o objetivo dessa classe?
+** Para indicar ao Spring Security que essa é a classe service que executa a lógica de autenticação **
+(A classe que implementa essa interface geralmente contém uma lógica para validar as credenciais de um cliente que está se autenticando.)
