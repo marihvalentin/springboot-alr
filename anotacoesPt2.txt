@@ -221,3 +221,34 @@ Aula 3 atividade 7 - Objetivo do método anyRequest().authenticated()
 ** Para indicar que outras URLs que não foram configuradas devem ter acesso restrito **
 (Essa configuração evita que uma URL que não foi configurada seja pública.)
 
+Aula 3 atividade 8 - Autenticando o usuário
+
+A configuração de autenticação do projeto será realizada no método configure(AuthenticationManagerBuilder auth), na classe Security Configurations.
+O método recebe uma variável auth, utilizaremos ela junto a chamada do método userDetailsService, o qual pede em parênteses qual a classe/service que 
+terá a lógica de autenticação implementada. Passaremos como parametro autenticacaoService e criaremos essa classe para implementar as regras de
+autenticação nela. Em cima da classe, será adicionada a anotação @Service e para dizer ao spring que essa Service tem a lógica de autenticação 
+necessária, implementaremos a interface UserDetailsService, adicionando também o método loadUserByUsername, que é o método que o spring chama no login, para 
+localizar o usuário ele busca através desse método no banco de dados e a senha ele buscará em memória para fazer a checagem. 
+Será necessário criar uma nova interface UsuarioRepository no pacote repository para implementação. Nela, importamos a classe Usuario, extendemos
+a classe JpaRepository e a declaração de método "Usuario findByEmail(String email)" para que o spring busque o usuário pelo email fornecido.
+Voltando a classe AutenticacaoService, chamaremos o repository pelo atributo de tipo UsuarioRepository com a anotação @Autowired e para fazer a consulta
+chamaremos o método findByEmail, passando como parâmetro o username. Vamos guardar o resultado numa variável usuario de tipo Usuario (importar classe).
+Se o método find não encontrar o usuário, devolverá um erro. Faremos o mesmo esquema do método detalhar na classe TopicosController (optional que devolve
+exception), alterando UsuarioRepository e adicionando um if no Service; caso o spring não ache o usuário, o retorno será uma exception.
+Voltando para SecurityConfigurations, será necessário adicionar o AutenticacaoService. Criaremos uma variável autenticacaoService de mesmo tipo (conforme a classe)
+com a anotação @Autowired.
+Para testar, precisamos ter um usuário cadastrado no banco de dados, que já temos. Lembra daquele arquivo data.sql? Naquele script de inicialização do 
+banco de dados eu criei um registro para o usuário. O e-mail dele é alura@email,com, a senha é 123456. Porém, em qualquer aplicação deixar a senha em 
+aberto no banco de dados não é uma boa prática. Geralmente o pessoal utiliza algum algoritmo para gerar um HASH dessa senha e salva no banco de dados a 
+senha com o HASH. Também vamos fazer isso na classe de autenticação. Nós chamamos o auth, o UserDetailsService, só que antes do ponto e vírgula colocamos 
+um passwordEncoder. Conseguimos dizer para ele qual o algoritmo de HASH que vamos utilizar para a senha. O Spring suporta alguns algoritmos que são seguros, 
+um deles é o tal do BCrypt. Posso instanciar um objeto BCryptPasswordEncoder. É uma classe do próprio Spring security que já implementa a geração do algoritmo 
+do HASH, da senha, usando o algoritmo específico. Só que no nosso data.sql, quando ele vai criar um usuário no banco, ele está jogando a senha em texto aberto. 
+Tenho que passar um valor que é o HASH no formato do BCrypt. Para facilitar, vou na minha classe SecurityConfigurations e vou dar um system out, 
+vou chamar o método encode e vou passar a senha 123456. Se eu rodar esse main, só estou falando para ele pegar o BCrypt e gerar o HASH da senha.
+No arquivo SQL vou trocar a senha pela senha criptografada. Vou voltar no SecurityConfiguration e vou apagar o main, só para termos a tenha gerada. Agora, 
+já consigo simular. Vou tentar me autenticar com aquele usuário. Digitando a senha errada, tento logar, ele não permite. Com a senha certa, funciona. 
+E a partir de agora consigo chamar os endpoints que estão restritos.
+
+
+
