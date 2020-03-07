@@ -272,7 +272,21 @@ na classe Perfil;
 >> Para o Spring Security gerar automaticamente um formulário de login, devemos chamar o método and().formLogin(), dentro do método configure(HttpSecurity http), 
 que está na classe SecurityConfigurations;
 >> A lógica de autenticação, que consulta o usuário no banco de dados, deve implementar a interface UserDetailsService;
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 >> Devemos indicar ao Spring Security qual o algoritmo de hashing de senha que utilizaremos na API, chamando o método passwordEncoder(), 
 dentro do método configure(AuthenticationManagerBuilder auth), que está na classe SecurityConfigurations.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AULA 4 - GERANDO TOKEN COM JWT
+
+Aula 4 Atividade 2 - POR QUE AUTENTICAR VIA TOKEN
+
+Numa API de modelo REST, o ideal é que a autenticação seja feita por stateless. Ou seja, o cliente dispara uma requisição, leva todas as informações necessárias, 
+o servidor processa, executa o que tem que executar, devolve a resposta e acabou. No modelo tradicional via session, cada acesso cria um espaço na memória e são
+diferenciados por um ID único e o ID é devolvido como resposta para o navegador no formato de um Cookie e nas próximas requisições que esse usuário fizer por esse
+navegador, o browser automaticamente envia esse parâmetro como cookie já registrado. ISSO VAI CONTRA O PRINCÍPIO DO REST, que consiste em ser stateless. 
+Com o Spring Security, é possível configurar para que o Spring não crie uma session a cada login e se comporte de acordo com o modelo stateless, mas nas próximas 
+requisições do usuário o servidor não saberá se ele está logado ou não pois não há informações armazenadas na memória e por isso o usuário precisa enviar alguma 
+informação. Isso é realizado via token, a cada requisição o cliente mandará um token para identificá-lo e mostrar se ele possui as devidas permissões.
+
+AULA 4 Atividade 2 - CONFIGURANDO AUTENTICAÇÃO STATELESS
