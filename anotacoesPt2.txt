@@ -290,3 +290,25 @@ requisições do usuário o servidor não saberá se ele está logado ou não pois não 
 informação. Isso é realizado via token, a cada requisição o cliente mandará um token para identificá-lo e mostrar se ele possui as devidas permissões.
 
 AULA 4 Atividade 2 - CONFIGURANDO AUTENTICAÇÃO STATELESS
+
+Vamos aprender a como não utilizar sessão e fazer a autenticação no modelo stateless seguindo as boas práticas do modelo Rest.
+Utilizaremos o JSON WEB TOKEN, que é uma tecnologia para geração de tokens e autenticação de maneira stateless. Para isso, precisamos utilizar alguma Biblioteca
+em JAVA que siga o modelo web token, a JJWT. Então ela será adicionada como dependência no arquivo pom.xml (maven) do projeto.
+Após o maven baixar a dependência, precisamos atualizar o arquivo SecurityConfigurations para informar ao Spring Security que a autenticação não mais será feita 
+por sessão, mas por modelo stateless. Isso será realizado no método Configure, onde foram configuradas as URLS, o principal método da classe. Retiramos o login por
+formulário (o que faria autenticação por sessão) e desabilitaremos a autenticação do token csrf.
+Adicionaremos .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); (chamamos o método para dizer que não queremos utilizar sessão e avisamos
+o Spring Security que utilizaremos token com maneira stateless.
+Porém, como apagamos o form de login, a partir de agora não temos formulário de login gerado pelo Spring. Então quem fornecerá o formulário de login na API será o
+cliente no frontEnd. Além disso, perdemos o controller que faz a parte de autenticação pois era gerado pelo Spring. Então, deveremos criar uma nova classe Controller
+para cuidar da autenticação.
+Na classe AutenticacaoController, adicionamos @RestController @RequestMapping("/auth") sobre a classe e definiremos um método para ter a lógica de autenticação.
+O método autenticar que devolve ResponseEntity e terá o @PostMapping, pois o método será chamado caso a requisição seja /auth via método Post.
+O método será chamado quando o cliente solicitar ao usuário os dados de login e senha. Os parâmetros serão o login e senha, que virão no corpo da requisição (@RequestBody)
+e vamos validar os dados também (@Valid). Não vamos receber os dados soltos, pelo LoginForm, a nova classe que criaremos para receber os dados em tipo correto.
+Dentro da LoginForm, teremos apenas os atributos de email e senha e seus getters setters, que o cliente enviará como o json esses dados para a classe.
+No primeiro momento, vamos fazer um system out com form. get email e um com get senha para saber se os dados corretos estão chegando e o retorno será
+return ResponseEntity.ok().build();
+Agora vamos testar no Postman. O teste deu erro 403 forbidden porque esquecemos de liberar a url. Toda nova url deverá ser liberada no metodo configure
+da classe SecurityConfigurations. No código, falaremos para o Spring Security que requisições do tipo Post para "/auth", permite all. Após salvo, o teste funcionou.
+
