@@ -289,7 +289,7 @@ Com o Spring Security, é possível configurar para que o Spring não crie uma sess
 requisições do usuário o servidor não saberá se ele está logado ou não pois não há informações armazenadas na memória e por isso o usuário precisa enviar alguma 
 informação. Isso é realizado via token, a cada requisição o cliente mandará um token para identificá-lo e mostrar se ele possui as devidas permissões.
 
-AULA 4 Atividade 2 - CONFIGURANDO AUTENTICAÇÃO STATELESS
+AULA 4 Atividade 3 - CONFIGURANDO AUTENTICAÇÃO STATELESS
 
 Vamos aprender a como não utilizar sessão e fazer a autenticação no modelo stateless seguindo as boas práticas do modelo Rest.
 Utilizaremos o JSON WEB TOKEN, que é uma tecnologia para geração de tokens e autenticação de maneira stateless. Para isso, precisamos utilizar alguma Biblioteca
@@ -312,3 +312,12 @@ return ResponseEntity.ok().build();
 Agora vamos testar no Postman. O teste deu erro 403 forbidden porque esquecemos de liberar a url. Toda nova url deverá ser liberada no metodo configure
 da classe SecurityConfigurations. No código, falaremos para o Spring Security que requisições do tipo Post para "/auth", permite all. Após salvo, o teste funcionou.
 
+"Primeiras configurações em código/classes para o uso de autenticação via token no modelo Stateless: autalização da SecurityConfigurations para o modelo 
+starteless, criada a AutenticacaoController e a LoginForm para cuidar da autenticação e receber os dados de login, respectivamente"
+
+AULA 4 Atividade 4 - Página de login
+
+> No vídeo anterior, tivemos que remover a chamada ao método and().formLogin() da classe SecurityConfigurations. 
+Mas dessa maneira, como um usuário vai se autenticar na API?
+** O usuário deverá se autenticar por uma página de login fornecida pela própria aplicação cliente **
+(A aplicação cliente deve ter uma página de login, que faz a chamada ao endpoint de autenticação da API.)
