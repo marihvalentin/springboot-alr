@@ -349,4 +349,13 @@ Salvas todas as configurações para geração do token no método (explicados nos co
 o token e faremos o teste no postman.
 No próximo exercício, vamos ver como no controller podemos fazer para devolver esse token, porque aqui eu só fiz o system out para ver se está tudo ok.
 
-"Realizadas configurações para o Spring fazer a geração de Token a partir da autenticação"
+"Realizadas configurações para o Spring fazer a geração de Token a partir da autenticação na classe de Controller, na classe de dados do login e na SecurityConfigurations"
+
+AULA 4 Atividade 6 - Injeção de Propriedades
+
+> No último vídeo, vimos que é possível fazer injeção de dependências de propriedades do arquivo application.properties. Dos exemplos de código abaixo, 
+qual deles faz a injeção de propriedades de maneira correta?
+** @Value(“${forum.jwt.secret}”)
+private String secret; **
+(A anotação @Value deve declarar o nome da propriedade como String, utilizando a expression language ${}.)
+
