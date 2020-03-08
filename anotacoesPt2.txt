@@ -359,3 +359,13 @@ qual deles faz a injeção de propriedades de maneira correta?
 private String secret; **
 (A anotação @Value deve declarar o nome da propriedade como String, utilizando a expression language ${}.)
 
+
+AULA 4 ATIVIDADE 8 - RETORNANDO O TOKEN PARA O CLIENTE
+
+Vamos devolver o token como resposta no método autenticar. Estávamos usando o padrão de classes DTO e dentro delas encapsular as informações, vamos seguir esse padrão.
+Dentro do ResponseEntity.ok(), vamos colocar no parênteses "new TokenDTO(token, "Bearer")" que consiste na nova classe TokenDTO, passando como parâmetro o token e 
+o tipo de autenticação Bearer a ser realizada nas próximas requisições. Criada a classe TokenDTO, vamos mudar o retorno do método autenticar para um 
+ResponseEntity<TokenDTO>. Dentro de TokenDTO vamos criar também seu construtor para receber o token e o tipo de autenticação e os getters.
+Ao salvar, vamos testar no Postman. O disparo da requisição retornou o token para o cliente e o tipo de autenticação, o token o cliente é responsável por
+guardar em algum lugar, pois na próxima autenticação desse usuário ele levará esse token no cabeçalho responsável pela autorização. O cabeçalho pede o tipo de autenticação
+Veremos a frente como enviar esse token e fazer a autenticação nas próximas autenticações a partir desse cabeçalho. 
