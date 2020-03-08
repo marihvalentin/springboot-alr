@@ -321,3 +321,32 @@ AULA 4 Atividade 4 - Página de login
 Mas dessa maneira, como um usuário vai se autenticar na API?
 ** O usuário deverá se autenticar por uma página de login fornecida pela própria aplicação cliente **
 (A aplicação cliente deve ter uma página de login, que faz a chamada ao endpoint de autenticação da API.)
+
+
+AULA 4 Atividade 5 - Gerando Tokens com JWT
+
+Foi implementado o Controller com a parte de autenticação, que recebe os dados de autenticação de usuário e senha. O próximo passo é autenticar no Spring
+e fazer a geração do token. Como não estamos mais utilizando o Formulário do Spring que já possuía um Controller que fazia a chamada para a autenticação, teremos
+que fazer a chamada de autenticação manualmente. Vamos remover os System.out da classe autenticar e para fazer a autenticação de maneira programática, manual, 
+precisaremos injetar a classe AutenticationManager, declarando um atributo de seu tipo, com anotação @Autowired. Porém, a classe é do Spring mas ele não consegue
+puxar as dependências dela automaticamente, a não ser que seja configurado isso. Deveremos configurar na Classe SecurityConfigurations. Na classe que estamos herdando
+já há um método que "sabe" herdar o AuthenticationManager, então vamos apenas sobrescrever o método na classe e colocar o @Bean sobre a classe para assim o Spring
+saber que esse método devolve o AuthenticationManager e assim conseguiremos injetá-lo no Controller.
+Voltando ao Controller, chamaremos o atributo authManager junto ao método authenticate e os dados necessários para fazer a autenticação, passando o email e senha
+não soltos, mas um objeto específico que criaremos acima do tipo UsernamePasswordAuthenticationToken, chamado de dadosLogin. Dentro do objeto deverão ser passados
+com new o login e senha e faremos o esquema que já fizemos no TopicoController, pegar o form e criar o método converter, que fará a conversão com os dados que o form
+precisa com os dados dentro do form; então criamos o méotodo converter na classe LoginForm, com retorno return new UsernamePasswordAuthenticationToken(email, senha);
+Essa é a classe (AutenticacaoController) que o Spring precisa para realizar a autenticação e o método autenticar devolve um objeto que vamos guardar numa variável
+de tipo Authentication. Quando o Spring chamar essa linha de código ele vai ver as configurações e saberá que deve chamar a AuthenticationService, que chama o usuarioRepository.
+Se der certo, devolveremos "ok" mas se não (login e senha errado), ele devolverá uma exception. Então vamos fazer um tratamento com um try catch. 
+Se der ok, vamos devolver o Token (que será armazenado numa String), então precisamos gerá-lo com a biblioteca JJWT porém para não deixarmos seu código solto, ele será
+isolado numa classe TokenService (uma @Service), com um método gerarToken. Na hora de gerar o token, precisaremos identificar o usuário dono do token, então nesse método, 
+passaremos o authentication como parâmetro. No método gerarToken dentro da classe TokenService vamos colocar a API do JJWT para fazer a geração do token.
+No método vamos precisar injetar uma propriedade relacionada ao tempo de expiração do token gerado e uma senha presentes no application.properties. Mas como isso deverá
+ser feito? Iremos declarar um atributo na classe (expiration do tipo String e secret para a senha) e para injetá-los, utilizamos a anotação @Value que recebe um parâmetro, 
+que é o nome da propriedade. Dessa maneira o Spring vai ler o parâmetro, ver que está em application.properties e injetar a propriedade lá presente.
+Salvas todas as configurações para geração do token no método (explicados nos comentários do código), vamos inserir um system.out dentro do método autenticar imprimindo
+o token e faremos o teste no postman.
+No próximo exercício, vamos ver como no controller podemos fazer para devolver esse token, porque aqui eu só fiz o system out para ver se está tudo ok.
+
+"Realizadas configurações para o Spring fazer a geração de Token a partir da autenticação"
