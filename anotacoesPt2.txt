@@ -430,3 +430,20 @@ No último vídeo, vimos que precisamos criar um filtro, que vai conter a lógica d
 Vimos também que esse filtro precisa ser registrado no Spring. Qual anotação foi utilizada para registrar o filtro?
 ** Não existe anotação para registrar o filtro **
 (O filtro deve ser registrado via método addFilterBefore, na classe SecurityConfigurations.)
+
+
+AULA 5 ATIVIDADE 4 - VALIDANDO O TOKEN 
+
+O próximo passo é verificar se o token está válido, para isso deveremos usar a API daquela biblioteca que estamos utilizando, a JSON WEB TOKEN, porém tínhamos isolado
+o código dela naquela classe TokenService. Então nessa classe criaremos um método que recebe um token e devolve um boolean para dizer se ele está válido ou não.
+Na implementação para a validação, vamos fazer a chamada para essa classe e guardar o boolean que foi devolvido. Será necessário criar um atributo do tipo TokenService
+na classe. A ideia seria injetar esse Token Service, porém temos o problema da classe tipo filter não permitir a injeção de dependências, não é possível colocar um
+"@Autowired" aqui. Então para recebermos o parâmetro, podemos utilizar o construtor para injetar as dependências, então quem der "new" no filter deverá passar tokenservice
+como parâmetro. Ao salvar, identificamos que quem na verdade "dá new na classe filter é o registro do método configure na classe SecurityConfigurations, classe que
+nos permite o @Autowired para injeção de dependências. Então nela faremos a injeção da dependência e no registro do filter, dentro do new passamos o tokenService que foi
+injetado. Após salvar, criamos o metodo isTokenValido na classe TokenService para a validação do token. Para isso, vamos utilizar a classe Jwts.parser(), que é o método
+compatível com uma validação, com o parse do token, chamando a partir dele o setSigningKey, que recebe o secret e que chama o parseClaimsJws, o qual recebe token.
+Caso o token validado não esteja ok, esse código retornará uma exception. Nesse caso, vamos adicionar um try catch na classe, adicionar essa implementação no try
+junto com um return true e no catch com a condição de uma Exception, um retorno false.
+
+
