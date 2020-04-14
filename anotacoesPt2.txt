@@ -447,3 +447,10 @@ Caso o token validado não esteja ok, esse código retornará uma exception. Nesse 
 junto com um return true e no catch com a condição de uma Exception, um retorno false.
 
 
+AULA 5 ATIVIDADE 5 - INJEÇÃO DE DEPENDÊNCIAS NO FILTER
+
+Por que não é possível fazer injeção de dependências com a anotação @Autowired na classe AutenticacaoViaTokenFilter?
+** Porque ela não é um bean gerenciado pelo Spring **
+(O filtro foi instanciado manualmente por nós, na classe SecurityConfigurations e portanto o Spring não consegue realizar injeção de dependências via @Autowired.)
+
+
