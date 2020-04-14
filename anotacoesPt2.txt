@@ -396,3 +396,29 @@ SecurityConfigurations, que retorna uma chamada ao método super.authenticationMa
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AULA 5 - Autenticação via JWT
+
+
+AULA 5 ATIVIDADE 2 - RECUPERANDO O TOKEN DO HEAD AUTHORIZATION
+
+A primeira coisa que o cliente vai fazer é disparar uma requisição do tipo Post para aquele endereço /auth levando os dados de login e senha no arquivo json no Body 
+(dentro do postman). Ao disparar a requisição, teremos com retorno o token e o tipo de autenticação. A partir da requisição, o cliente da API é responsável
+por pegar o token fornecido e armazenar em algum lugar e nas próximas requisições protegidas que ele disparar, terá que levar o token gerado. Por exemplo, se o cliente
+tentar disparar uma requisição DELETE no endereço /topicos/2 sem enviar nenhuma informação, o status retornará como "403 forbidden", pois nos headers deve ser preenchido
+o cabeçalho "Authorization", com valor "Bearer" (tipo da autenticação) + o token. Mas ao executar a requisição novamente, o erro 403 persiste. Por que, se o token está
+correto? Porque a lógica não foi implementada e será isso que faremos nessa aula
+Para fazer a lógica, a ideia é que ela rode antes de cair no controller, no código. Será necessário então interceptar a requisição e executar a lógica. Para isso,
+será criado um filtro.
+No pacote security, criaremos a classe AutenticacaoViaTokenFilter, que será um filtro. No Spring, ela herdará a OncePerRequestFilter, que é um filtro do Spring que
+é chamado uma vez a cada requisição. Faremos a implementação do método abstrato (doFilterInternal) que é necessário e dentro dele implementaremos a lógica para 
+"pegar"	o token no header, verificar se ele está ok e se tiver autenticar no Spring; e a última linha que deve ter no método é a "filterChain.doFilter(request, response)"
+a qual informará ao Spring que a lógica implementada no filtro está concluída e ele deverá seguir o fluxo da requisição.
+Agora, na lógica, vamos recuperar o token do cabeçalho, validar e se a validação for ok autenticar no usuário para o spring. Mas por que autenticar novamente? Porque
+o nosso tipo de autenticação é STATELESS, então não há dados de login guardados na API. Desse modo, a autenticação é realizada em cada requisição, então em cada requisição
+que chegar a API será realizada a autenticação com o token para autorizar ou não a execução da mesma.
+Para recuperar o token, foi criado o método recuperarToken que recebe o request e pega do header da linha Authorization. Se o token não for vazio (dentre outras condições no if)
+o método retornará o token subtraindo os 7 primeiros caracteres (o tipo da autenticação).
+O primeiro teste para vermos se o método está recuperando o token corretamente não funcionou porque o spring não reconhece o filtro, então devemos registrá-lo no Spring
+na classe SecurityConfiguration, no metodo configure. Após o registro do filtro, fora a autenticação ainda não realizada o sistema mostra que o token está sendo recuperado
+corretamente.
+
