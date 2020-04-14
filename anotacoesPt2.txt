@@ -416,9 +416,17 @@ a qual informará ao Spring que a lógica implementada no filtro está concluída e 
 Agora, na lógica, vamos recuperar o token do cabeçalho, validar e se a validação for ok autenticar no usuário para o spring. Mas por que autenticar novamente? Porque
 o nosso tipo de autenticação é STATELESS, então não há dados de login guardados na API. Desse modo, a autenticação é realizada em cada requisição, então em cada requisição
 que chegar a API será realizada a autenticação com o token para autorizar ou não a execução da mesma.
-Para recuperar o token, foi criado o método recuperarToken que recebe o request e pega do header da linha Authorization. Se o token não for vazio (dentre outras condições no if)
+Para recuperar o token, foi criado o método recuperarToken que recebe o request e pega do header Authorization. Se o token não for vazio (dentre outras condições no if)
 o método retornará o token subtraindo os 7 primeiros caracteres (o tipo da autenticação).
 O primeiro teste para vermos se o método está recuperando o token corretamente não funcionou porque o spring não reconhece o filtro, então devemos registrá-lo no Spring
 na classe SecurityConfiguration, no metodo configure. Após o registro do filtro, fora a autenticação ainda não realizada o sistema mostra que o token está sendo recuperado
 corretamente.
 
+
+AULA 5 ATIVIDADE 3 - ANOTAÇÃO PARA REGISTRAR O FILTRO?
+
+
+No último vídeo, vimos que precisamos criar um filtro, que vai conter a lógica de recuperar o token do cabeçalho Authorization, validá-lo e autenticar o cliente. 
+Vimos também que esse filtro precisa ser registrado no Spring. Qual anotação foi utilizada para registrar o filtro?
+** Não existe anotação para registrar o filtro **
+(O filtro deve ser registrado via método addFilterBefore, na classe SecurityConfigurations.)
